@@ -1,3 +1,21 @@
+$min-font-size: 1rem !default;
+$max-font-size: 1.5rem !default;
+$min-breakpoint: 20rem !default;
+$max-breakpoint: 80rem !default;
+$font-size-diff: strip-unit($max-font-size - $min-font-size);
+$breakpoint-diff: strip-unit($max-breakpoint - $min-breakpoint);
+
 html {
-  color: $color;
+  font-family: $base-font-body;
+  font-size: $min-font-size;
+  line-height: $base-line-height;
+  color: $base-font-color;
+
+  @media screen and (min-width: $min-breakpoint) {
+    font-size: calc(#{$min-font-size} + #{$font-size-diff} * (100vw - #{$min-breakpoint}) / #{$breakpoint-diff});
+  }
+
+  @media screen and (min-width: $max-breakpoint) {
+    font-size: $max-font-size;
+  }
 }
